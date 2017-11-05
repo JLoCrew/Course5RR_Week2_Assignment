@@ -1,0 +1,74 @@
+---
+title: "Course5Week2_Assignment_JLo"
+author: "Joyce Lo"
+date: "November 5, 2017"
+output: html_document
+---
+
+This is my R markdown file for Course 5 Reproducible Research, Week 2 assignment
+
+Chunk 1: This first code chunk sets global parameters.  We always want to show the codes and results
+
+``` {r setoptions, echo=TRUE}
+library(knitr)
+opts_chunk$set(echo=TRUE)
+```
+
+Chunk 2: The 2nd code chunk reads the data from the URL
+
+```{r read data}
+
+fileURL <- "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip"
+if(!file.exists("data")){dir.create("data")}
+download.file(fileURL, destfile="./data/ActivityMonitoringData.zip")
+unzip(zipfile = "./data/ActivityMonitoringData.zip", exdir = "./data")
+
+steps_data <- read.csv("./data/activity.csv")
+
+#let's remove the missing entries and format dates
+new_steps_data <- na.omit(steps_data)
+new_steps_data$date <- as.Date(new_steps_data$date)
+```
+
+Chunk 3a: This code chunk sums the number of steps by day 
+
+```{r total steps by date}
+library(dplyr)
+
+Total_steps_byDay <- new_steps_data %>%
+  group_by(date) %>%
+  summarize(Total_steps=sum(steps))
+
+print(Total_steps_byDay)
+```
+
+Chunk 3b: This code chunk generates a histogram of total steps by day
+
+``` {r histogram of total steps by day}
+hist(Total_steps_byDay$Total_steps, col="blue", xlab="Steps per day", ylab="Frequency", main="Frequency of Steps by day")
+```
+
+Chunk 3c: this code chunk reports the mean and median Total_steps_by_day
+``` {r mean and median steps by day}
+mean(Total_steps_byDay$Total_steps)
+median(Total_steps_byDay$Total_steps)
+```
+
+Chunk 4a: this code chunk averages the steps by 5-min interval instead of totaling it by day
+``` {r average steps by the 5-min interval across the days}
+avg_step_byint <- new_steps_data %>%
+  group_by(interval) %>%
+  summarize(Avg_steps_by5min=mean(steps))
+
+print(avg_step_byint)
+```
+
+Chunk 4b: this code chunk plots a line graph of the average steps by the 5-min intervals
+``` {r line graph of avg steps by 5-min intervals}
+plot(avg_step_byint$interval, avg_step_byint$Avg_steps_by5min, type="l", col="red", xlab = "5-min interval", ylab = "Avg steps", main = "Avg Steps by 5-min interval across days")
+```
+
+Chunk 4c: this code chunk looks for the 5-min interval with the most steps on average across days
+``` {r 5-min interval with most steps}
+avg_step_byint[which.max(avg_step_byint$Avg_steps_by5min),]
+```
