@@ -72,3 +72,40 @@ Chunk 4c: this code chunk looks for the 5-min interval with the most steps on av
 ``` {r 5-min interval with most steps}
 avg_step_byint[which.max(avg_step_byint$Avg_steps_by5min),]
 ```
+
+Chunk 5a: this code chunk counts # of total missing values in dataset
+``` {r count na}
+sum(is.na(steps_data))
+```
+
+Chunk 5b: this code chunk replaces missing values with the avg # of steps from other observations with the same 5-min interval
+``` {r replace missing values}
+no_NA_data <- steps_data %>%
+  group_by(interval) %>%
+  mutate(steps= ifelse(is.na(steps), mean(steps,na.rm=TRUE), steps))
+```
+
+Chunk 5c: This code chunk sums the number of steps by day using new data set
+
+```{r total steps by date}
+
+NoNA_Total_steps_byDay <- no_NA_data %>%
+  group_by(date) %>%
+  summarize(noNA_Total_steps=sum(steps))
+
+print(NoNA_Total_steps_byDay)
+
+#something is off with Oct-02-2012. Perhaps the test subject wasn't wearing his device
+```
+
+Chunk 5d: This code chunk generates a histogram of total steps by day (no NA)
+
+``` {r histogram of total steps by day}
+hist(NoNA_Total_steps_byDay$noNA_Total_steps, col="pink", xlab="Steps per day", ylab="Frequency", main="Frequency of Steps by day (no NA)")
+```
+
+Chunk 5e: this code chunk reports the mean and median Total_steps_by_day (no NA)
+``` {r mean and median steps by day}
+mean(NoNA_Total_steps_byDay$noNA_Total_steps)
+median(NoNA_Total_steps_byDay$noNA_Total_steps)
+```
