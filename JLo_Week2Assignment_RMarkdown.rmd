@@ -143,9 +143,11 @@ plot(Interval_weekends$interval, Interval_weekends$Avg_steps_by5min, type="l", y
 ```
 
 ``` {r knit to html}
-spin('JLo_Week2Assignment_RMarkdown.rmd', knit=FALSE)
+library(knitr)
+knit2html("JLo_Week2Assignment_RMarkdown.rmd")
+browseURL("JLo_Week2Assignment_html.html")
+
 ```
 *This concludes my R Markdown file for this assignment*
-```
-```
+
 
