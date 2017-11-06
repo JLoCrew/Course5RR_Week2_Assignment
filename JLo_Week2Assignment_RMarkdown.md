@@ -53,7 +53,7 @@ Chunk 3b: This code chunk generates a histogram of total steps by day
 hist(Total_steps_byDay$Total_steps, col="blue", xlab="Steps per day", ylab="Frequency", main="Frequency of Steps by day")
 ```
 
-![plot of chunk histogram of total steps by day](figure/histogram of total steps by day-1.png)
+![plot of chunk histogram_of_total_steps_by_day](figure/histogram_of_total_steps_by_day-1.png)
 
 Chunk 3c: this code chunk reports the mean and median Total_steps_by_day
 
@@ -89,7 +89,7 @@ Chunk 4b: this code chunk plots a line graph of the average steps by the 5-min i
 plot(avg_step_byint$interval, avg_step_byint$Avg_steps_by5min, type="l", col="red", xlab = "5-min interval", ylab = "Avg steps", main = "Avg Steps by 5-min interval across days")
 ```
 
-![plot of chunk line graph of avg steps by 5-min intervals](figure/line graph of avg steps by 5-min intervals-1.png)
+![plot of chunk line_graph_of_avg_steps_by_5-min_intervals](figure/line_graph_of_avg_steps_by_5-min_intervals-1.png)
 
 Chunk 4c: this code chunk looks for the 5-min interval with the most steps on average across days
 
@@ -135,7 +135,7 @@ Chunk 5d: This code chunk generates a histogram of total steps by day (no NA)
 hist(NoNA_Total_steps_byDay$noNA_Total_steps, col="pink", xlab="Steps per day", ylab="Frequency", main="Frequency of Steps by day (no NA)")
 ```
 
-![plot of chunk histogram of total steps by day with new data set](figure/histogram of total steps by day with new data set-1.png)
+![plot of chunk histogram_of_total_steps_by_day_with_new_dataset](figure/histogram_of_total_steps_by_day_with_new_dataset-1.png)
 
 Chunk 5e: this code chunk reports the mean and median Total_steps_by_day (no NA)
 
@@ -188,7 +188,7 @@ plot(Interval_weekdays$interval, Interval_weekdays$Avg_steps_by5min, type="l", y
 plot(Interval_weekends$interval, Interval_weekends$Avg_steps_by5min, type="l", ylab="Avg Steps", xlab="", main="Avg Steps by Interval on Weekends", col="blue")
 ```
 
-![plot of chunk multi-faceted plot showing weekdays vs. weekends](figure/multi-faceted plot showing weekdays vs. weekends-1.png)
+![plot of chunk multi-faceted_plot_showing_weekdays_vs_weekends](figure/multi-faceted_plot_showing_weekdays_vs_weekends-1.png)
 
 
 ```r
